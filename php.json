@@ -1,0 +1,212 @@
+{
+    // Place your snippets for php here. Each snippet is defined under a snippet name and has a prefix, body and
+    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+    // same ids are connected.
+    // Example:
+    // "Print to console": {
+    // 	"prefix": "log",
+    // 	"body": [
+    // 		"console.log('$1');",
+    // 		"$2"
+    // 	],
+    // 	"description": "Log output to console"
+    // }
+    "Comment Template": {
+      "prefix": "New Comment",
+      "body": [
+        "// =============================================================================",
+        "// ${title} ============================================================$0"
+      ]
+    },
+    "Shortcode Template": {
+      "prefix": "New ShortCode",
+      "body": [
+        "function ${functionName}( \\$atts ) {",
+        "\tob_start();",
+        "\t\\$query = new WP_Query( array(",
+        "\t\t'post_type' => 'Posts',",
+        "\t\t'order' => 'ASC',",
+        "\t\t'posts_per_page' => '-1',",
+        "\t) );",
+        "\tif ( \\$query->have_posts() ) { ?>",
+        "\t\t\t<?php \\$incrementNum = 0; ?>",
+        "\t\t\t<?php while ( \\$query->have_posts()) : \\$query->the_post(); ?>",
+        "\t\t\t<?php \\$postUrl = get_permalink(); ?>",
+        "\t\t\t<?php \\$title = get_the_title();  ?>",
+        "\t\t\t<?php \\$date =  get_the_date(); ?>",
+        "\t\t\t<?php \\$category = get_the_category(); ?>",
+        "\t\t\t<?php \\$thumbnailUrl = wp_get_attachment_image_src( get_post_thumbnail_id(\\$post->ID), 'XXCustomImageSizeXX' )[0]; ?>",
+        "\t\t\t<div>",
+        "\t\t\t\tHtml Here$0",
+        "\t\t\t</div>",
+        "\t\t\t<?php \\$incrementNum++; ?>",
+        "\t\t\t<?php endwhile;",
+        "\t\t\twp_reset_postdata(); ?>",
+        "\t<?php \\$myvariable = ob_get_clean();",
+        "\treturn \\$myvariable;",
+        "\t}",
+        "}",
+        "add_shortcode( '${shortcode}', '${functionName}' );"
+      ]
+    },
+    "New Post Type Template": {
+      "prefix": "New Post Type",
+      "body": [
+        "function ${1:functionName}() {",
+        "\tregister_post_type('${2:Post Type}',",
+        "\tarray(",
+        "\t\t'labels' => array(",
+        "\t\t'name' => __('${3:Post Type}'),",
+        "\t\t'singular_name' => __('${4:Single Post}')",
+        "\t),",
+        "\t'public' => true,",
+        "\t'has_archive' => true,",
+        "\t'supports' => array( 'title', 'editor', 'comments', 'revisions', 'trackbacks', 'author', 'excerpt', 'page-attributes', 'thumbnail', 'custom-fields', 'post-formats'  ),",
+        "\t)",
+        "\t);",
+        "}",
+        "add_action('init', '${1:functionName}');"
+      ]
+    },
+    "New Taxonomy (Tag Template)": {
+      "prefix": "New Tag Template",
+      "body": [
+        "function ${0:tag function}_tags() {",
+        "\t$${1:tag variable}_tags = array(",
+        "\t\t'name' => _x( '${2: Tag Name} Tags', 'taxonomy general name' ),",
+        "\t\t'singular_name' => _x( '${2: Tag Name} Tag', 'taxonomy singular name' ),",
+        "\t\t'search_items' =>  __( 'Search ${2: Tag Name} Tags' ),",
+        "\t\t'popular_items' => __( 'Popular ${2: Tag Name} Tags' ),",
+        "\t\t'all_items' => __( 'All ${2: Tag Name} Tags' ),",
+        "\t\t'parent_item' => null,",
+        "\t\t'parent_item_colon' => null,",
+        "\t\t'edit_item' => __( 'Edit ${2: Tag Name} Tag' ), ",
+        "\t\t'update_item' => __( 'Update ${2: Tag Name} Tag' ),",
+        "\t\t'add_new_item' => __( 'Add New ${2: Tag Name} Tag' ),",
+        "\t\t'new_item_name' => __( 'New ${2: Tag Name} Tag Name' ),",
+        "\t\t'separate_items_with_commas' => __( 'Separate ${2: Tag Name} tags with commas' ),",
+        "\t\t'add_or_remove_items' => __( 'Add or remove ${2: Tag Name} tags' ),",
+        "\t\t'choose_from_most_used' => __( 'Choose from the most used ${2: Tag Name} tags' ),",
+        "\t\t'menu_name' => __( '${2: Tag Name} Tags' ),",
+        ");",
+        "register_taxonomy('${1:tag variable}_tags','${3: Post Type}',array(",
+        "\t\t'hierarchical' => false,",
+        "\t\t'labels' => $${1:tag variable}_tags,",
+        "\t\t'show_ui' => true,",
+        "\t\t'show_admin_column' => true,",
+        "\t\t'update_count_callback' => '_update_post_term_count',",
+        "\t\t'query_var' => true,",
+        "\t\t'rewrite' => array( 'slug' => '${1:tag variable} tags' ),",
+        "\t));",
+        "}",
+        "add_action('init', '${0:tag function}_tags');"
+      ]
+    },
+    "ACF Get Field": {
+      "prefix": "_gf",
+      "body": [
+        "get_field('${0}');"
+      ]
+    },
+    "Block Template": {
+      "prefix": "New Block",
+      "body": [
+        "/**",
+        " * Content Block Template",
+        " *",
+        " * @param   array $block The block settings and attributes.",
+        " * @param   string $content The block inner HTML (empty).",
+        " * @param   bool $is_preview True during AJAX preview.",
+        " * @param   (int|string) $post_id The post ID this block is saved to.",
+        " */",
+        "",
+        "// Create id attribute allowing for custom \"anchor\" value.",
+        "$id = 'gallery-' . $block['id'];",
+        "if( !empty($block['anchor']) ) {",
+        "    $id = $block['anchor'];",
+        "}",
+        "",
+        "// Create class attribute allowing for custom \"className\" and \"align\" values.",
+        "$className = 'gallery';",
+        "if( !empty($block['className']) ) {",
+        "    $className .= ' ' . $block['className'];",
+        "}",
+        "if( !empty($block['align']) ) {",
+        "    $className .= ' align' . $block['align'];",
+        "}",
+        "",
+        "// Load values and assign defaults.",
+        "",
+        "",
+        "?>",
+        "",
+        "<div id=\"<?php echo esc_attr($id); ?>\" class=\"<?php echo esc_attr($className);\"\" ?>\">",
+        "    <div class=\"<?php echo esc_attr($className);\"\" ?>__inner\">",
+        "       ",
+        "    </div>",
+        "</div>"
+      ],
+      "description": ""
+    },
+    "ACF Repeater Loop Template": {
+      "prefix": "repeater loop",
+      "body": [
+        "if( have_rows('${0}') ):",
+        "\twhile( have_rows('${0}') ) : the_row();",
+        "\t\t$sub_value = get_sub_field('sub_field');",
+        "\t\t //Html Here",
+        "\tendwhile;",
+        "endif;"
+      ]
+    },
+    "Wordpress Query Snippet": {
+      "prefix": "New Query",
+      "body": [
+        "\\$${1:variableName} = new WP_Query( array(",
+        "  'post_type' => '${0:posttype}',",
+        "  'order' => 'ASC',",
+        "  'posts_per_page' => '-1',",
+        ") );",
+        "",
+        "while ( \\$${1:variableName}->have_posts()) : \\$${1:variableName}->the_post();",
+        "\\$postUrl = get_permalink();",
+        "\\$title = get_the_title(); ",
+        "\\$date =  get_the_date();",
+        "\\$category = get_the_category();",
+        "\\$thumbnailUrl = wp_get_attachment_image_src( get_post_thumbnail_id(\\$post->ID), 'XXCustomImageSizeXX' )[0];",
+        "?>",
+        "<div>",
+        "  Html Here",
+        "</div>",
+        "<?php endwhile;"
+      ],
+      "description": "Wordpress Query Snippet"
+    },
+    "Wordpress Register Block": {
+      "prefix": "Register Block",
+      "body": [
+        " acf_register_block_type([",
+        "        'name'        => '${1:Block Id}',",
+        "        'title'       => __('${2:Title}'),",
+        "        'description' => __('${3:Block Desc}'),",
+        "        'render_template' => plugin_dir_path( __FILE__ ) . 'blocks/${0:Block Path}/block.php',",
+        "        'enqueue_style' => plugins_url('/blocks/${0:Block Path}/index.css', __FILE__),",
+        "        'enqueue_script' => plugins_url('/blocks/${0:Block Path}/index.js', __FILE__),",
+        "        'enqueue_assets' => function(){",
+        "         ",
+        "        },",
+        "        'icon'            => 'editor-alignleft',",
+        "        'keywords'        => ['content', 'image'],",
+        "        ]);"
+      ],
+      "description": "Wordpress register Block"
+    },
+    "Php Shortcut": {
+      "prefix": "ppp",
+      "body": [
+        "<?php ${0} ?>"
+      ],
+      "description": "Wordpress register Block"
+    }
+  }

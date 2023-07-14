@@ -1,0 +1,66 @@
+{
+	// Place your snippets for dart here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+
+	"New Page Route": {
+		"prefix": "New Page Route",
+		"body": [
+			"Navigator.push(context, MaterialPageRoute(builder: (context)=> new $0 ));",
+		],
+		"description": "Log output to console"
+	},
+	"Flutter Boilerplate": {
+		"prefix": "Flutter Boilerplate",
+		"body": [
+			"import 'package:flutter/material.dart';",
+			"",
+			"class $1\textends StatelessWidget {",
+			"\t@override",
+			"\tWidget build(BuildContext context) {",
+				"\t\treturn Container(",
+				"\t\t\t$0",
+				"\t\t);",
+			"\t}",
+			"}"
+		],
+		"description": "A simple Boilerplate for a new Flutter File"
+	},
+
+	"New Future": {
+		"prefix": "New Future",
+		"body": [
+			"FutureBuilder(",
+        	"\t  future: $1,",
+        	"\t  builder: (BuildContext context, snapshot) {",
+			"\t    if (snapshot.data == null) {",
+			"\t    //Future fetching ", 
+			"\t    } else {",
+			"\t    //Future Recieved",
+        	"\t    }",
+        	"\t  },",
+        	"\t)"
+		],
+		"description": "The Future Begins With You!"
+	},
+	"Widget Build Item": {
+		"prefix": "new widget build item",
+		"body": [
+		  "Widget build(BuildContext context) {",
+		  "$0",
+		  "}",
+		],
+		"description": "The return part of a custom class"
+	  },
+}
