@@ -45,5 +45,60 @@
 			"box-shadow: 0px 2px 3px 0px #000000;"
 		],
 		"description": "A Simple Box Shadow Template"
+	},
+	"Object Fit": {
+		"prefix": "object fit",
+		"body": [
+			"object-fit: cover;",
+			"object-position: center;",
+			"height: 100%;",
+			"width: 100%;"
+		],
+		"description": "Standard object fit settings"
+	},
+	"Small Media Query": {
+		"prefix": "@media-sm",
+		"body": [
+			"@media screen and (max-width: 559.98px){",
+			"\t$0",
+			"}",
+		],
+		"description": "Small Boostrtap Media query"
+	},
+	"Medium Media Query": {
+		"prefix": "@media-md",
+		"body": [
+			"@media screen and (max-width: 767.98px){",
+			"\t$0",
+			"}",
+		],
+		"description": "Medium Boostrtap Media query"
+	},
+	"Large Media Query": {
+		"prefix": "@media-lg",
+		"body": [
+			"@media screen and (max-width: 991.98px){",
+			"\t$0",
+			"}",
+		],
+		"description": "large Boostrtap Media query"
+	},
+	"XL Media Query": {
+		"prefix": "@media-xl",
+		"body": [
+			"@media screen and (max-width: 1199.98px){",
+			"\t$0",
+			"}",
+		],
+		"description": "Extra Large Boostrtap Media query"
+	},
+	"XXL Media Query": {
+		"prefix": "@media-xxl",
+		"body": [
+			"@media screen and (max-width: 1399.98px){",
+			"\t$0",
+			"}",
+		],
+		"description": "2X Larage Boostrtap Media query"
 	}
 }
